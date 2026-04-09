@@ -1,10 +1,11 @@
+from django.http import HttpRequest
 from ninja import Router
 
-router = Router(
-    tags=['Categories'],
-)
+from core.apps.categories.schemas import CategorySchema
+
+router = Router(tags=["Categories"])
 
 
-@router.get('/')
-def get_categories(request):
+@router.get("/", response=list[CategorySchema])
+def get_categories(request: HttpRequest):
     pass

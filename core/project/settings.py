@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import environs
 
 env = environs.Env()
@@ -21,6 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # internal
     "core.apps.categories.apps.CategoriesConfig",
+    "core.apps.districts.apps.DistrictsConfig",
 ]
 
 MIDDLEWARE = [
@@ -78,9 +80,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "Asia/Tashkent"
@@ -90,7 +89,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
