@@ -1,5 +1,6 @@
 from django.contrib import admin
-from unfold.admin import ModelAdmin, TabularInline, StackedInline
+from unfold.admin import ModelAdmin, StackedInline
+
 
 from .models import (
     FAQ,
@@ -9,6 +10,7 @@ from .models import (
     PortfolioJob,
     Service,
     ServiceInclude,
+    FeedbackRequest,
     JobsChoices,
 )
 
@@ -51,3 +53,9 @@ class ServiceAdmin(ModelAdmin):
     list_display = ["title", "deadlines", "format", "created_at"]
     list_filter = ["created_at"]
     inlines = [ServiceIncludeInline]
+
+
+@admin.register(FeedbackRequest)
+class FeedbackRequestAdmin(ModelAdmin):
+    list_display = ["name", "phone_number", "created_at"]
+    list_filter = ["created_at"]

@@ -16,10 +16,12 @@ class FAQ(BaseModel):
         ordering = ["-created_at"]
 
 
+class GoalChoices(models.TextChoices):
+    BUY = "buy", "Купить"
+    SELL = "sell", "Продать"
+
+
 class ConsultingRequest(BaseModel):
-    class GoalChoices(models.TextChoices):
-        BUY = "buy", "Купить"
-        SELL = "sell", "Продать"
 
     name = models.CharField(verbose_name="Имя", max_length=50)
     phone_number = models.CharField(verbose_name="Номера телефона")
@@ -124,3 +126,17 @@ class PortfolioImage(BaseModel):
         verbose_name="Фото",
         upload_to="portfolio/images/%Y/%m/%d",
     )
+
+
+class FeedbackRequest(BaseModel):
+    name = models.CharField(verbose_name="Имя", max_length=100)
+    phone_number = models.CharField(verbose_name="Номер телефона", max_length=20)
+    message = models.TextField(verbose_name="Задача")
+
+    def __str__(self):
+        return f"{self.name}-{self.phone_number}"
+
+    class Meta:
+        verbose_name = "Заявка на обратную связь"
+        verbose_name_plural = "Заявки на обратную связь"
+        ordering = ["-created_at"]
