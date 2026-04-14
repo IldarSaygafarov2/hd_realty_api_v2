@@ -1,7 +1,5 @@
 from django.db import models
 
-from multiselectfield import MultiSelectField
-from django.contrib.postgres.fields import ArrayField
 from core.apps.common.models import BaseModel
 
 
@@ -76,7 +74,7 @@ class ServiceInclude(BaseModel):
 JobsChoices = (
     ("photos_job", "Фотографии, подчеркивающие свет и пространство."),
     ("video_job", "Съемка и монтаж видео"),
-    ("AI контент", "result_job"),
+    ("result_job", "AI контент"),
     ("ai_job", "Реализация от концепции до результата"),
 )
 
@@ -86,6 +84,33 @@ class Portfolio(BaseModel):
         verbose_name="Видео",
         upload_to="portfolio/videos/%Y/%m/%d",
     )
+
+    def __str__(self):
+        return ", ".join([job.get_job_display() for job in self.jobs.all()])
+
+    class Meta:
+        verbose_name = "Портфолио"
+        verbose_name_plural = "Портфолио"
+        ordering = ["-created_at"]
+
+
+class PortfolioJob(BaseModel):
+    job = models.CharField(
+        verbose_name="Выполненная работа", choices=JobsChoices, max_length=70
+    )
+    portfolio = models.ForeignKey(
+        Portfolio,
+        on_delete=models.CASCADE,
+        related_name="jobs",
+        verbose_name="Портфолио",
+    )
+
+    def __str__(self):
+        return self.get_job_display()
+
+    class Meta:
+        verbose_name = "Выполненная работа"
+        verbose_name_plural = "Выполненные работы"
 
 
 class PortfolioImage(BaseModel):

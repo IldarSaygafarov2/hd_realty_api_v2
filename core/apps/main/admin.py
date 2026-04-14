@@ -1,21 +1,31 @@
 from django.contrib import admin
-from django.contrib.postgres.fields import ArrayField
-from unfold.admin import ModelAdmin
-from unfold.contrib.forms.widgets import ArrayWidget
+from unfold.admin import ModelAdmin, TabularInline, StackedInline
 
 from .models import (
     FAQ,
     ConsultingRequest,
     Portfolio,
+    PortfolioImage,
+    PortfolioJob,
     Service,
     ServiceInclude,
     JobsChoices,
 )
 
 
+class PortfolioImageInline(StackedInline):
+    model = PortfolioImage
+    extra = 1
+
+
+class PortfolioJobInline(StackedInline):
+    model = PortfolioJob
+    extra = 1
+
+
 @admin.register(Portfolio)
 class PortfolioAdmin(ModelAdmin):
-    pass
+    inlines = [PortfolioJobInline, PortfolioImageInline]
 
 
 @admin.register(FAQ)
