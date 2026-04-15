@@ -3,7 +3,7 @@ from ninja import Router
 
 from core.apps.categories.schemas import CategorySchema
 
-router = Router(tags=["Categories"])
+router = Router(tags=["Категории"])
 
 
 @router.get("/", response=list[CategorySchema])

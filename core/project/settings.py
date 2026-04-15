@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "core.apps.main.apps.MainConfig",
     "core.apps.categories.apps.CategoriesConfig",
     "core.apps.districts.apps.DistrictsConfig",
+    "core.apps.advertisements.apps.AdvertisementsConfig",
 ]
 
 MIDDLEWARE = [
