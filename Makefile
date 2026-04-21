@@ -1,13 +1,16 @@
-DC = docker compose
-API_CONTAINER = hd-api
-MANAGE = python manage.py
+DC=docker compose
+API_CONTAINER=hd-api
+MANAGE=python manage.py
+LOGS=docker logs
 
 
-.PHONY: up down makemigrations migrate
+.PHONY: up down makemigrations migrate app-logs
 
 up:
 	${DC} up --build
 
+app-logs:
+	${LOGS} -f ${API_CONTAINER}
 
 down:
 	${DC} down -v

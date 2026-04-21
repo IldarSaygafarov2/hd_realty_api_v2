@@ -29,9 +29,10 @@ class AdvertisementAdmin(unfold_admin.ModelAdmin):
         "category",
         "district",
         "operation_type",
-        "renavation_type",
+        "renovation_type",
         "is_moderated",
         "created_at",
     ]
     list_editable = ["operation_type", "renovation_type", "category", "district"]
     search_fields = ["title"]
+    readonly_fields = ["price_uzs"]

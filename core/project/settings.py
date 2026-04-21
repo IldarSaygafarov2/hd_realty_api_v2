@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "unfold.contrib.filters",  # optional, if special filters are needed
     "unfold.contrib.forms",  # optional, if special form elements are needed
     "unfold.contrib.inlines",  # optional, if special inlines are needed
+    "unfold.contrib.constance",
     #
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,6 +31,8 @@ INSTALLED_APPS = [
     "core.apps.categories.apps.CategoriesConfig",
     "core.apps.districts.apps.DistrictsConfig",
     "core.apps.advertisements.apps.AdvertisementsConfig",
+    # external
+    "constance",
 ]
 
 MIDDLEWARE = [
@@ -103,3 +106,53 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# CONSTANCE
+CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
+
+CONSTANCE_CONFIG = {
+    "THE_ANSWER": (
+        42,
+        "Answer to the Ultimate Question of Life, " "The Universe, and Everything",
+    ),
+    "CURRENCY_RATE": (1.0, "Тут хранится курс доллара"),
+}
+
+CONSTANCE_REDIS_CONNECTION = {
+    "host": env.str("CELERY_HOST"),
+    "port": env.int("CELERY_PORT"),
+    "db": 0,
+}
+CONSTANCE_REDIS_CACHE_TIMEOUT = 60
+
+
+# CELERY
+CELERY_TIMEZONE = "Asia/Tashkent"
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND")
+
+CURRENCY_RATE_API = env.str("CURRENCY_RATE_API")
+
+
+DISTRICTS_LIST = [
+    "Мирабадский",
+    "Мирзо-Улугбекский",
+    "Алмазарский",
+    "Бектемирский",
+    "Сергелийский",
+    "Чиланзарский",
+    "Шайхантаурский",
+    "Юнусабадский",
+    "Яккасарайский",
+    "Яшнабадский",
+    "Учтепинский",
+]
+
+RENOVATION_TYPES = [
+    "Черновая",
+    "Предчистовая",
+    "Чистовая",
+    "Косметический",
+    "Капитальный",
+    "Дизайнерский",
+]
