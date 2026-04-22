@@ -18,7 +18,8 @@ class AdvertisementCharacteristicInline(unfold_admin.StackedInline):
 class AdvertisementAdmin(unfold_admin.ModelAdmin):
     list_display = [
         "title",
-        "operation_type",
+        "price_usd",
+        "price_uzs",
         "renovation_type",
         "category",
         "district",
@@ -33,6 +34,6 @@ class AdvertisementAdmin(unfold_admin.ModelAdmin):
         "is_moderated",
         "created_at",
     ]
-    list_editable = ["operation_type", "renovation_type", "category", "district"]
+    list_editable = ["renovation_type", "category", "district"]
     search_fields = ["title"]
     readonly_fields = ["price_uzs"]

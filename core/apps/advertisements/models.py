@@ -1,5 +1,5 @@
+from constance import config
 from django.db import models
-
 
 from core.apps.common.models import BaseModel
 
@@ -24,6 +24,12 @@ class Advertisement(BaseModel):
         null=True,
         verbose_name="Тип ремонта",
     )
+    district = models.ForeignKey(
+        "districts.District",
+        on_delete=models.CASCADE,
+        verbose_name="Район",
+        related_name="advertisements",
+    )
 
     title = models.CharField(verbose_name="Название", max_length=120)
     slug = models.SlugField(verbose_name="Слаг", max_length=200, null=True)
@@ -38,7 +44,7 @@ class Advertisement(BaseModel):
         decimal_places=3,
         null=True,
         blank=True,
-        help_text="Цена будет высчитываться от price_usd после сохранения объявления",
+        help_text=f"Цена будет высчитываться от price_usd по курса: '{config.CURRENCY_RATE}' после сохранения объявления",
     )
 
     description = models.TextField(verbose_name="Описание")
@@ -81,12 +87,6 @@ class Advertisement(BaseModel):
     # location
     address = models.CharField(verbose_name="Адрес", max_length=200)
     city = models.CharField(verbose_name="Город", max_length=100)
-    district = models.ForeignKey(
-        "districts.District",
-        on_delete=models.CASCADE,
-        verbose_name="Район",
-        related_name="advertisements",
-    )
 
     # TODO: добавить поле для карты
     # TODO: добавить поле для агента

@@ -2,8 +2,8 @@ from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
 from slugify import slugify
 
-from core.project.settings import CATEGORIES_LIST
 from core.apps.categories.models import Category
+from core.project.settings import CATEGORIES_LIST
 
 
 class Command(BaseCommand):
@@ -26,4 +26,3 @@ class Command(BaseCommand):
                 category = Category.objects.get(name=category)
                 category.slug = category_slug
                 category.save()
-        print(f"Added {len(CATEGORIES_LIST)} to categories")

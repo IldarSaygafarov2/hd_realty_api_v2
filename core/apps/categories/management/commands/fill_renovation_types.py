@@ -18,5 +18,3 @@ class Command(BaseCommand):
                     title=item, slug=slugify(item)
                 )
                 print(f"added: {new_renovation_type=}")
-
-        print(f"Added {len(RENOVATION_TYPES)} items")
