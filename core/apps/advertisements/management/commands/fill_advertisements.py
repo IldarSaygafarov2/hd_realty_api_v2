@@ -46,7 +46,7 @@ class Command(BaseCommand):
                 total_area=round(random.uniform(40, 150), 3),
                 living_space=round(random.uniform(40, 150), 3),
                 complex_name=(
-                    f"ЖК {faker.text(nb_words=2)}"
+                    f"ЖК {faker.text(max_nb_chars=5)}"
                     if category.name == "Новостройка"
                     else None
                 ),

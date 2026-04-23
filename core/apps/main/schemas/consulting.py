@@ -1,11 +1,12 @@
 from uuid import UUID
 
 from ninja import Schema
+from core.apps.common.schemas import ORMModel
 
 from ..models import GoalChoices
 
 
-class ConsultingRequestBase(Schema):
+class ConsultingRequestBase(ORMModel):
     name: str
     phone_number: str
     goal: GoalChoices
