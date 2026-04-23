@@ -7,14 +7,12 @@ from core.project.settings import RENOVATION_TYPES
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        renovation_types = RenovationType.objects.all()
+        for renovation_type in renovation_types:
+            renovation_type.delete()
+
         for item in RENOVATION_TYPES:
-            try:
-                existing = RenovationType.objects.get(title=item)
-                if not existing.slug:
-                    existing.slug = slugify(item)
-                    existing.save()
-            except RenovationType.DoesNotExist:
-                new_renovation_type = RenovationType.objects.create(
-                    title=item, slug=slugify(item)
-                )
-                print(f"added: {new_renovation_type=}")
+            new_renovation_type = RenovationType.objects.create(
+                title=item, slug=slugify(item)
+            )
+            print(f"added: {new_renovation_type=}")

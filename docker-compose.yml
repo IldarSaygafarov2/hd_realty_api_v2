@@ -8,10 +8,11 @@ services:
         python manage.py makemigrations && 
         python manage.py migrate --noinput && 
         python manage.py createsuperuser --noinput || true &&
-        python manage.py fill_districts  || true &&
-        python manage.py fill_renovation_types  || true &&
-        python manage.py fill_categories  || true &&
-        python manage.py fill_advertisements  || true &&
+        python manage.py fill_districts || true &&
+        python manage.py fill_renovation_types || true &&
+        python manage.py fill_categories || true &&
+        python manage.py fill_property_types || true &&
+        python manage.py fill_advertisements || true &&
         gunicorn core.project.wsgi:application --bind 0.0.0.0:8000 --reload
       "
     env_file:
@@ -43,6 +44,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
   redis:
     image: redis:latest
     ports:
@@ -58,6 +60,7 @@ services:
       - redis
     env_file:
       - .env
+
   beat:
     build: .
     command: celery -A core.project:celery_app beat -l INFO

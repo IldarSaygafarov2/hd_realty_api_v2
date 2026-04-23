@@ -1,7 +1,7 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
 
-from .models import Category, RenovationType, PropertyType
+from .models import Category, PropertyType, RenovationType
 
 
 @admin.register(Category)
@@ -14,10 +14,10 @@ class CategoryAdmin(ModelAdmin):
 
 @admin.register(RenovationType)
 class RenovationTypeAdmin(ModelAdmin):
-    list_display = ["name", "slug", "created_at", "updated_at"]
-    prepopulated_fields = {"slug": ("name",)}
+    list_display = ["title", "slug", "created_at", "updated_at"]
+    prepopulated_fields = {"slug": ("title",)}
     list_filter = ["created_at"]
-    search_fields = ["name"]
+    search_fields = ["title"]
 
 
 @admin.register(PropertyType)
