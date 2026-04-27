@@ -8,6 +8,7 @@ from core.apps.advertisements.choices import OperationTypeChoices
 from core.apps.advertisements.models import Advertisement
 from core.apps.categories.models import Category, RenovationType
 from core.apps.districts.models import District
+from constance import config
 
 faker = Faker()
 
@@ -33,6 +34,7 @@ class Command(BaseCommand):
             title = faker.sentence()
 
             price_usd = round(random.uniform(300, 5000), 3)
+            price_uzs = round(price_usd * config.CURRENCY_RATE, 3)
 
             new_advertisement = Advertisement.objects.create(
                 title=title,
@@ -42,6 +44,7 @@ class Command(BaseCommand):
                 district=district,
                 renovation_type=renovation_type,
                 price_usd=price_usd,
+                price_uzs=price_uzs,
                 description=faker.text(),
                 total_area=round(random.uniform(40, 150), 3),
                 living_space=round(random.uniform(40, 150), 3),
