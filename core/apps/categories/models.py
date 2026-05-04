@@ -12,15 +12,6 @@ class Category(BaseModel):
     def __str__(self) -> str:
         return self.name
 
-    def to_entity(self) -> CategorySchema:
-        return CategorySchema(
-            id=self.id,
-            name=self.name,
-            slug=self.slug,
-            created_at=self.created_at,
-            updated_at=self.updated_at,
-        )
-
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"

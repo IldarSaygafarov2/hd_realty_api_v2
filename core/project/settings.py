@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     "core.apps.districts.apps.DistrictsConfig",
     "core.apps.advertisements.apps.AdvertisementsConfig",
     # external
+    "rest_framework",
+    "drf_spectacular",
     "constance",
 ]
 
@@ -167,3 +169,17 @@ CATEGORIES_LIST = [
 ]
 
 PROPERTY_TYPES_LIST = ["Новостройки", "Вторичный фонд"]
+
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Your Project API",
+    "DESCRIPTION": "Your project description",
+    "VERSION": "1.0.0",
+    # "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
+}
